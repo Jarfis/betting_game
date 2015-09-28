@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var theMoney = 100;
+        $("#money_left").text("$"+theMoney);
+
+        $("#submit_bet").on("click", function(){
+          var r = Math.floor((Math.random() * 10) + 1);
+          
+	  
+          var theBet = $("#the_bet").val();
+	  var theGuess = $("#the_guess").val();
+
+	  if(theBet == "" || theGuess == "" || theBet < 5 || theBet > 10 || theGuess < 1 || theGuess > 10)
+	  {
+	    alert("Please fill in all values correctly");
+	  }
+          else if(theGuess == r)
+	  {
+	    theMoney += (theBet * 2);
+	    $("#the_roll").text(r);
+	    //alert("x");
+	  }
+	  else if(theGuess != r+1 && theGuess != r-1)
+	  {
+	    theMoney -= theBet;
+            $("#the_roll").text(r);
+	  }
+  
+          $("#money_left").text("$"+theMoney);
+	  
+	  if(theMoney <=0)
+	  {
+	    alert("You lose, stop gambling");
+	    $("#submit_bet").hide();
+	  }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <p id="money_left"></p>
+    <label for="the_bet">The Bet ($5-$10)</label>
+    <input type="text" id="the_bet">
+    <label for="the_guess">Your Guess (1-10)</script>
+    <input type="text" id="the_guess">
+    <input type="button" id="submit_bet" value="Bet">
+    <p id="the_roll"></p>
+  </body>
+
+</html>
